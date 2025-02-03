@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BGM Player</title>
+</head>
+<body>
+    <audio id="bgm" loop autoplay>
+        <source src="https://blog.kakaocdn.net/dn/ck8Fs4/btsIOGLR4Wi/c1hX1wd1DoMR7rV6SMVKkK/92914%20-%20Okinawa%20%28Audio%29.mp3?attach=1&knm=tfile.mp3" type="audio/mpeg">
+        브라우저가 오디오 태그를 지원하지 않습니다.
+    </audio>
+
+    <script>
+        const audio = document.getElementById("bgm");
+        if (localStorage.getItem("bgmPlaying") === "true") {
+            audio.play();
+        }
+
+        window.addEventListener("message", (event) => {
+            if (event.data === "play") {
+                audio.play();
+                localStorage.setItem("bgmPlaying", "true");
+            } else if (event.data === "pause") {
+                audio.pause();
+                localStorage.setItem("bgmPlaying", "false");
+            }
+        });
+    </script>
+</body>
+</html>
