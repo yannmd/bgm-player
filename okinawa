@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BGM Player</title>
+</head>
+<body>
+    <audio id="bgm" autoplay loop>
+        <source src="https://blog.kakaocdn.net/dn/ck8Fs4/btsIOGLR4Wi/c1hX1wd1DoMR7rV6SMVKkK/92914%20-%20Okinawa%20%28Audio%29.mp3?attach=1&knm=tfile.mp3" type="audio/mp3">
+        브라우저가 오디오 태그를 지원하지 않습니다.
+    </audio>
+
+    <button id="playPauseBtn">일시정지</button>
+
+    <script>
+        var audio = document.getElementById("bgm");
+        var playPauseBtn = document.getElementById("playPauseBtn");
+
+        // 이전 상태 기억 (localStorage 활용)
+        if (localStorage.getItem("bgmPaused") === "true") {
+            audio.pause();
+            playPauseBtn.textContent = "재생";
+        }
+
+        playPauseBtn.addEventListener("click", function() {
+            if (audio.paused) {
+                audio.play();
+                playPauseBtn.textContent = "일시정지";
+                localStorage.setItem("bgmPaused", "false");
+            } else {
+                audio.pause();
+                playPauseBtn.textContent = "재생";
+                localStorage.setItem("bgmPaused", "true");
+            }
+        });
+
+        // 볼륨 설정 (0.0 ~ 1.0)
+        audio.volume = 0.5;
+    </script>
+</body>
+</html>
